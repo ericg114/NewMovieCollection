@@ -37,7 +37,7 @@ public class MovieCollection
             System.out.println("- list top 50 (r)ated movies");
             System.out.println("- list top 50 (h)igest revenue movies");
             System.out.println("- (q)uit");
-            System.out.print("Enter choice: ");
+            System.out.print("Enter option: ");
             menuOption = scanner.nextLine();
 
             if (!menuOption.equals("q"))
@@ -111,19 +111,19 @@ public class MovieCollection
         {
             String title = results.get(i).getTitle();
 
-            // this will print index 0 as choice 1 in the results list; better for user!
-            int choiceNum = i + 1;
+            // this will print index 0 as option 1 in the results list; better for user!
+            int optionNum = i + 1;
 
-            System.out.println("" + choiceNum + ". " + title);
+            System.out.println("" + optionNum + ". " + title);
         }
 
         System.out.println("Which one do you want to learn more about?");
         System.out.print("Enter the number- ");
 
-        int choice = scanner.nextInt();
+        int option = scanner.nextInt();
         scanner.nextLine();
 
-        Movie selectedMovie = results.get(choice - 1);
+        Movie selectedMovie = results.get(option - 1);
 
         displayMovieInfo(selectedMovie);
 
@@ -207,10 +207,10 @@ public class MovieCollection
         System.out.println("Which member do you want to learn about?");
         System.out.print("Enter number: ");
 
-        int choice = scanner.nextInt();
+        int option = scanner.nextInt();
         scanner.nextLine();
 
-        String selected = castMembers.get(choice - 1);
+        String selected = castMembers.get(option - 1);
         ArrayList<Movie> list = new ArrayList<Movie>();
 
         for (Movie movie : moviesWithWord) {
@@ -226,10 +226,10 @@ public class MovieCollection
             System.out.println(order + ". " + list.get(i).getTitle());
         }
 
-        choice = scanner.nextInt();
+        option = scanner.nextInt();
         scanner.nextLine();
 
-        Movie selectedMovie = list.get(choice - 1);
+        Movie selectedMovie = list.get(option - 1);
 
         displayMovieInfo(selectedMovie);
 
@@ -259,10 +259,10 @@ public class MovieCollection
         System.out.println("Which one of the movies do you want to explore: ");
         System.out.print("Enter the number: ");
 
-        int choice = scanner.nextInt();
+        int option = scanner.nextInt();
         scanner.nextLine();
 
-        Movie selectedMovie = moviesWithWord.get(choice - 1);
+        Movie selectedMovie = moviesWithWord.get(option - 1);
 
         displayMovieInfo(selectedMovie);
 
@@ -298,9 +298,9 @@ public class MovieCollection
                 System.out.println(order + ". " + genre.get(i));
             }
             System.out.println("Type tha tnumber your looking for");
-            int choice = scanner.nextInt();
+            int option = scanner.nextInt();
             scanner.nextLine();
-            String selectedGenre = genre.get(choice-1);
+            String selectedGenre = genre.get(option-1);
             ArrayList<Movie> moviesWithGenre = new ArrayList<Movie>();
             for (Movie movie : movies) {
                 if (movie.getGenres().contains(selectedGenre)) {
@@ -317,10 +317,10 @@ public class MovieCollection
             System.out.println("what Movie do you want?");
             System.out.print("Enter number: ");
 
-            choice = scanner.nextInt();
+            option = scanner.nextInt();
             scanner.nextLine();
 
-            Movie selectedMovie = moviesWithGenre.get(choice - 1);
+            Movie selectedMovie = moviesWithGenre.get(option - 1);
 
             displayMovieInfo(selectedMovie);
 
@@ -334,7 +334,7 @@ public class MovieCollection
     {
         String title = "";
         double rating = 0.0;
-        int index1 = 0;
+        int inx = 0;
         for(int i = 1; i < 51; i++)
         {
             for(int z = 1; z < movies.size(); z++)
@@ -343,30 +343,32 @@ public class MovieCollection
                 {
                     title = movies.get(z-1).getTitle();
                     rating = movies.get(z-1).getUserRating();
-                    index1 = z-1;
+                    inx = z-1;
                 }
                 if(z == 1 && movies.get(z-1).getUserRating() < movies.get(z).getUserRating())
                 {
                     title = movies.get(z).getTitle();
                     rating = movies.get(z).getUserRating();
-                    index1 = z;
+                    inx = z;
                 }
                 if(rating < movies.get(z).getUserRating() && z!=1)
                 {
                     title = movies.get(z).getTitle();
                     rating = movies.get(z).getUserRating();
-                    index1 = z;
+                    inx = z;
                 }
             }
-            System.out.println(i + "" + title + " " + rating);
-            movies.remove(index1);
+            System.out.println(i + ": " + title + " " + rating);
+            movies.remove(inx);
         }
     }
 
     private void listHighestRevenue()
     {
         ArrayList<Movie> allMovies = new ArrayList<>(movies);
+
         ArrayList<Movie> highestRevenue = new ArrayList<>();
+
         for (int i = 0; i < 50; i++) {
             double highestValue = allMovies.get(0).getRevenue();
             int indexOf = 0;
@@ -381,16 +383,18 @@ public class MovieCollection
 
         int count = 1;
         for (Movie moviesList : highestRevenue) {
+
             System.out.println(count + ". " + moviesList.getTitle() + " (Box Revenue: " + moviesList.getRevenue() + ")");
             count++;
+
         }
         System.out.println("Which movie would you like to learn more about?");
         System.out.print("Enter number: ");
 
-        int choice = scanner.nextInt();
+        int option = scanner.nextInt();
         scanner.nextLine();
 
-        Movie selectedMovie = highestRevenue.get(choice - 1);
+        Movie selectedMovie = highestRevenue.get(option - 1);
 
         displayMovieInfo(selectedMovie);
 
